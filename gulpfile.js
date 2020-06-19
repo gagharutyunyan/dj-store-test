@@ -46,72 +46,82 @@ function sync() {
 }
 
 function html() {
-  return src(path.src.html)
-    .pipe(fileInclude())
-    .pipe(webpHTML())
-    .pipe(dest(path.build.html))
-    .pipe(browserSync.stream());
+  return (
+    src(path.src.html)
+      .pipe(fileInclude())
+      // .pipe(webpHTML())
+      .pipe(dest(path.build.html))
+      .pipe(browserSync.stream())
+  );
 }
 
 function css() {
-  return src(path.src.css)
-    .pipe(
-      scss({
-        outputStyle: 'expanded',
-      })
-    )
-    .pipe(groupMediaQueries())
-    .pipe(
-      autoprefixer({
-        overrideBrowserslist: ['last 5 versions'],
-        cascade: true,
-      })
-    )
-    .pipe(webpcss())
-    .pipe(dest(path.build.css))
-    .pipe(cssCleaner())
-    .pipe(
-      rename({
-        extname: '.min.css',
-      })
-    )
-    .pipe(dest(path.build.css))
-    .pipe(browserSync.stream());
+  return (
+    src(path.src.css)
+      .pipe(
+        scss({
+          outputStyle: 'expanded',
+        })
+      )
+      .pipe(groupMediaQueries())
+      .pipe(
+        autoprefixer({
+          overrideBrowserslist: ['last 5 versions'],
+          cascade: true,
+        })
+      )
+      // .pipe(webpcss())
+
+      // .pipe(dest(path.build.css))
+      // .pipe(cssCleaner())
+      // .pipe(
+      //   rename({
+      //     extname: '.min.css',
+      //   })
+      // )
+      .pipe(dest(path.build.css))
+      .pipe(browserSync.stream())
+  );
 }
 
 function js() {
-  return src(path.src.js)
-    .pipe(fileInclude())
-    .pipe(dest(path.build.js))
-    .pipe(uglifyJs())
-    .pipe(
-      rename({
-        extname: '.min.js',
-      })
-    )
-    .pipe(dest(path.build.js))
-    .pipe(browserSync.stream());
+  return (
+    src(path.src.js)
+      .pipe(fileInclude())
+
+      // .pipe(dest(path.build.js))
+      // .pipe(uglifyJs())
+      // .pipe(
+      //   rename({
+      //     extname: '.min.js',
+      //   })
+      // )
+      .pipe(dest(path.build.js))
+      .pipe(browserSync.stream())
+  );
 }
 
 function img() {
-  return src(path.src.img)
-    .pipe(
-      webp({
-        quality: 70,
-      })
-    )
-    .pipe(dest(path.build.img))
-    .pipe(src(path.src.img))
-    .pipe(
-      imageMin({
-        progressive: true,
-        svgoPlugins: [{ removeViewBox: false }],
-        interlaced: true,
-        optimizationLevel: 3,
-      })
-    )
-    .pipe(dest(path.build.img))
-    .pipe(browserSync.stream());
+  return (
+    src(path.src.img)
+      // .pipe(
+      //   webp({
+      //     quality: 70,
+      //   })
+      // )
+      .pipe(dest(path.build.img))
+      .pipe(src(path.src.img))
+      .pipe(
+        imageMin({
+          progressive: true,
+          svgoPlugins: [{ removeViewBox: false }],
+          interlaced: true,
+          optimizationLevel: 3,
+        })
+      )
+      .pipe(dest(path.build.img))
+      .pipe(browserSync.stream())
+  );
 }
 
 gulp.task('svgSprite', function () {
