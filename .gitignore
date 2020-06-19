@@ -5,7 +5,7 @@ dist/*
 !dist/index.html
 node_modules/
 *.log
-/gulpfile.js
+gulpfile.js
 
 # OS generated files
 .DS_Store
