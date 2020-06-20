@@ -7,13 +7,14 @@ const slides = document.querySelectorAll('.slider li');
 const slideButtons = document.querySelectorAll('.slider-button');
 
 menuBurger.addEventListener('click', () => {
-    if (
-        pageContacts.classList.contains('opened') ||
-        pageNav.classList.contains('opened')
-    ) {
+    if (menuBurger.firstChild.classList.contains('active')) {
+        menuBurger.firstChild.classList.remove('active');
+        pageContacts.parentElement.classList.remove('opened');
         pageContacts.classList.remove('opened');
         pageNav.classList.remove('opened');
     } else {
+        menuBurger.firstChild.classList.add('active');
+        pageContacts.parentElement.classList.add('opened');
         pageContacts.classList.add('opened');
         pageNav.classList.add('opened');
     }
@@ -26,7 +27,7 @@ const slidesData = [
             span: 'Оснащение конференц-залов',
             description:
                 'Профессиональное оборудование для конференц-залов предназначено для проведения и организации презентаций, совещаний, бизнес-тренингов и онлайн-трансляции контента. Обратный звонок Заполнить бриф',
-            bg: 'http://localhost:3000/img/page-slider__img-1.jpg',
+            bg: './img/page-slider__img-1.jpg',
         },
         slide: {
             number: '01',
@@ -40,7 +41,7 @@ const slidesData = [
             span: 'Оснащение конференц-залов 2',
             description:
                 'Профессиональное оборудование для конференц-залов предназначено для проведения и организации презентаций, совещаний, бизнес-тренингов и онлайн-трансляции контента. Обратный звонок Заполнить бриф',
-            bg: '',
+            bg: './img/page-slider__img-2.jpg',
         },
         slide: {
             number: '02',
@@ -54,7 +55,7 @@ const slidesData = [
             span: 'Оснащение конференц-залов 3',
             description:
                 'Профессиональное оборудование для конференц-залов предназначено для проведения и организации презентаций, совещаний, бизнес-тренингов и онлайн-трансляции контента. Обратный звонок Заполнить бриф',
-            bg: '',
+            bg: './img/page-slider__img-3.jpg',
         },
         slide: {
             number: '03',
@@ -68,7 +69,7 @@ const slidesData = [
             span: 'Оснащение конференц-залов 4',
             description:
                 'Профессиональное оборудование для конференц-залов предназначено для проведения и организации презентаций, совещаний, бизнес-тренингов и онлайн-трансляции контента. Обратный звонок Заполнить бриф',
-            bg: '',
+            bg: './img/page-slider__img-4.jpg',
         },
         slide: {
             number: '04',
@@ -84,7 +85,8 @@ const conferenceGenerator = (title, aboutConference, description, bgImage) => {
     const p = document.querySelector('.conference__description p');
     const background = document.querySelector('.page-slider');
 
-    background.style.background = `url(${bgImage})`;
+    background.style.background = `url(${bgImage}) no-repeat `;
+    background.style.backgroundSize = `cover`;
     h1.textContent = title;
     span.textContent = aboutConference;
     p.textContent = description;
