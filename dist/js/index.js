@@ -9,10 +9,12 @@ const slideButtons = document.querySelectorAll('.slider-button');
 menuBurger.addEventListener('click', () => {
     if (menuBurger.firstChild.classList.contains('active')) {
         menuBurger.firstChild.classList.remove('active');
+        pageContacts.parentElement.classList.remove('opened');
         pageContacts.classList.remove('opened');
         pageNav.classList.remove('opened');
     } else {
         menuBurger.firstChild.classList.add('active');
+        pageContacts.parentElement.classList.add('opened');
         pageContacts.classList.add('opened');
         pageNav.classList.add('opened');
     }
